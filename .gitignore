@@ -1,0 +1,16 @@
+# Compiled PDFs
+*.pdf
+
+# Typst cache
+.typst/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
