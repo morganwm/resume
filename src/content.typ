@@ -42,7 +42,9 @@
       [
         Led Design and Implementation of Analytics Platform for extremely large-scale data analytics on Apple Manufacturing Data
         #linebreak()
-        #text(style: "italic")[Tools: Jupyter, Python, Spark, Kubernetes, Docker/Containers, AWS (EKS, EC2, S3, CloudFormation, IAM)]
+        #text(
+          style: "italic",
+        )[Tools: Jupyter, Python, Spark, Kubernetes, Docker/Containers, AWS (EKS, EC2, S3, CloudFormation, IAM)]
         #linebreak()
         - Deep technical dive for Spark on K8s
         - Led coordination across teams to set up custom monitoring to ensure consistent performance.
@@ -53,7 +55,9 @@
       [
         Designed, Architected, Led development for distributed system running on all Apple manufacturing data in real time and batch
         #linebreak()
-        #text(style: "italic")[Tools: Jupyter, Python, Spark, Kubernetes, Golang, Docker/Containers, Linux/Unix Tooling, AWS (S3)]
+        #text(
+          style: "italic",
+        )[Tools: Jupyter, Python, Spark, Kubernetes, Golang, Docker/Containers, Linux/Unix Tooling, AWS (S3)]
         #linebreak()
         - Worked with users and data scientists to determine appropriate scope and requirements
         - Set up various CI, Packaging, and CD pipelines to allow for deployment of services to very secure, isolated sites
@@ -66,7 +70,9 @@
       [
         Team Technical Lead for Application Architecture, Infrastructure, and Backend Application Development
         #linebreak()
-        #text(style: "italic")[Tools: Grafana, Prometheus, Splunk, Spark, Kubernetes, Helm, Golang, Docker/Containers, Linux/Unix Tooling, AWS (S3)]
+        #text(
+          style: "italic",
+        )[Tools: Grafana, Prometheus, Splunk, Spark, Kubernetes, Helm, Golang, Docker/Containers, Linux/Unix Tooling, AWS (S3)]
         #linebreak()
         - Worked with DevOps teams to ensure best practices with CI/CD, HA, atomic/immutable deployments
         - Wrote Custom self-contained forwarder (library and image) to connect monitoring tools to Apple internal Alerting

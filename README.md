@@ -24,7 +24,7 @@ Install Typst:
 typst compile resume.typ resume.pdf
 ```
 
-### Watch Mode (auto-compile on changes)
+### Watch Mode (Auto-Compile on Changes)
 
 ```bash
 typst watch resume.typ resume.pdf
