@@ -25,72 +25,64 @@
     title: "SOFTWARE ENGINEER",
     company: "Apple (Manufacturing Data Insight)",
     location: "Austin, Texas",
-    date: "May 2019 – Present",
-    tools: none,
-    bullets: (
-      [
-        Led Design and Implementation of Large Scale Data Ingestion and Movement for Apple Manufacturing Data
-        #linebreak()
-        #text(style: "italic")[Tools: Golang, Linux tooling, Docker, AWS S3, Python, Kafka, and exploration in Flink]
-        #linebreak()
-        - Led Discovery and Requirements gathering from various hardware and testing customers
-        - Led Research into existing network and compute infrastructure at manufacturing sites
-        - Designed and Built a lightweight daemon in Go with tunable performance characteristics for use at mfg. sites
-        - Designed a fault tolerant system for coordinating the daemons running remotely on-sites
-        - Built an initial MVP which served to collect several TB of targeted data for compliance and research purposes
-      ],
-      [
-        Led Design and Implementation of Analytics Platform for extremely large-scale data analytics on Apple Manufacturing Data
-        #linebreak()
-        #text(
-          style: "italic",
-        )[Tools: Jupyter, Python, Spark, Kubernetes, Docker/Containers, AWS (EKS, EC2, S3, CloudFormation, IAM)]
-        #linebreak()
-        - Deep technical dive for Spark on K8s
-        - Led coordination across teams to set up custom monitoring to ensure consistent performance.
-        - Worked with AWS to optimize node "packing" to reduce idle compute.
-        - Worked with users to determine requirements for a custom tooling to help them more easily use the platform.
-        - Led experimentation for leveraging Rust based Polars data frames for rapid lookup in underlying data files.
-      ],
-      [
-        Designed, Architected, Led development for distributed system running on all Apple manufacturing data in real time and batch
-        #linebreak()
-        #text(
-          style: "italic",
-        )[Tools: Jupyter, Python, Spark, Kubernetes, Golang, Docker/Containers, Linux/Unix Tooling, AWS (S3)]
-        #linebreak()
-        - Worked with users and data scientists to determine appropriate scope and requirements
-        - Set up various CI, Packaging, and CD pipelines to allow for deployment of services to very secure, isolated sites
-        - Lightweight daemon to coordinate movement of large amounts of data from various locations to centralized storage
-        - Customer driven tools to allow for ease of interaction with overall platform
-        - Set up pipeline to run arbitrary ML Docker Images on a combination of stored and incoming data in real-time
-        - Set up ELT pipeline for extracting and aggregating values from manufacturing data
-        - Set up ETL Pipelines for managing a nested set structure of apple employees generated from LDAP
-      ],
-      [
-        Team Technical Lead for Application Architecture, Infrastructure, and Backend Application Development
-        #linebreak()
-        #text(
-          style: "italic",
-        )[Tools: Grafana, Prometheus, Splunk, Spark, Kubernetes, Helm, Golang, Docker/Containers, Linux/Unix Tooling, AWS (S3)]
-        #linebreak()
-        - Worked with DevOps teams to ensure best practices with CI/CD, HA, atomic/immutable deployments
-        - Wrote Custom self-contained forwarder (library and image) to connect monitoring tools to Apple internal Alerting
-        - Set up Monitoring/Logging Stack for distributed systems
-        - Set up custom CI/CD pipeline for deploying distributed system and monitoring/alerting stack
-        - Built standard Docker base image for use on K8s interfacing with Apple internal systems
-        - Wrote tools to help make logging, observability, monitoring transparent for developers
-        - Contributed to the official Internal Apple PySpark Sample Applications
-        - Developed libraries for maintaining compatibility with S3 Crypto for internal Object Store
-      ],
+    date: "May 2019 - Present",
+    projects: (
+      (
+        title: "Design and Implementation of Large Scale Data Ingestion and Movement for Apple Manufacturing Data",
+        tools: "Golang, Linux tooling, Docker, AWS S3, Python, Kafka, and exploration in Flink",
+        bullets: (
+          "Led Discovery and Requirements gathering from various hardware and testing customers",
+          "Led Research into existing network and compute infrastructure at manufacturing sites",
+          "Designed and Built a lightweight daemon in Go with tunable performance characteristics for use at manufacturing sites",
+          "Designed a fault tolerant system for coordinating the daemons running remotely on-sites",
+          "Built an initial MVP which served to collect several terabytes of targeted data for compliance and research purposes",
+        ),
+      ),
+      (
+        title: "Design and Implementation of Analytics Platform for extremely large-scale data analytics on Apple Manufacturing Data",
+        tools: "Jupyter, Python, Spark, Kubernetes, Docker/Containers, AWS (EKS, EC2, S3, CloudFormation, IAM)",
+        bullets: (
+          "Deep technical dive for Spark on K8s",
+          "Led coordination across teams to set up custom monitoring to ensure consistent performance.",
+          "Worked with AWS to optimize node packing to reduce idle compute.",
+          "Worked with users to determine requirements for a custom tooling to help them more easily use the platform.",
+          "Led experimentation for leveraging Rust based Polars data frames for rapid lookup in underlying data files.",
+        ),
+      ),
+      (
+        title: "Distributed system running on all Apple manufacturing data in real time and batch",
+        tools: "Jupyter, Python, Spark, Kubernetes, Golang, Docker/Containers, Linux/UNIX Tooling, AWS (S3)",
+        bullets: (
+          "Worked with users and data scientists to determine appropriate scope and requirements",
+          "Set up various CI, Packaging, and CD pipelines to allow for deployment of services to very secure, isolated sites",
+          "Lightweight daemon to coordinate movement of large amounts of data from various locations to a centralized storage location",
+          "Customer driven tools to allow for ease of interaction with overall platform",
+          "Set up pipeline to run arbitrary ML Docker Images on a combination of stored and incoming data in real-time",
+          "Set up ELT pipeline for extracting and aggregating values from manufacturing data",
+          "Set up ETL Pipelines for managing a nested set structure of apple employees generated from LDAP",
+        ),
+      ),
+      (
+        title: "Team Technical Lead for Application Architecture, Infrastructure, and Backend Application Development",
+        tools: "Grafana, Prometheus, Splunk, Spark, Kubernetes, Helm, Golang, Docker/Containers, Linux/UNIX Tooling, AWS (S3)",
+        bullets: (
+          "Worked with DevOps teams to ensure best practices with CI/CD, HA, atomic/immutable deployments",
+          "Wrote Custom self-contained forwarder (library and image) to connect monitoring tools to Apple internal Alerting",
+          "Set up Monitoring/Logging Stack for distributed systems",
+          "Set up custom CI/CD pipeline for deploying distributed system and monitoring/alerting stack",
+          "Built standard Docker base image for use on K8s interfacing with Apple internal systems",
+          "Wrote tools to help make logging, observability, monitoring transparent for developers",
+          "Contributed to the official Internal Apple PySpark Sample Applications",
+          "Developed libraries for maintaining compatibility with S3 Crypto for internal Object Store",
+        ),
+      ),
     ),
   ),
   (
     title: "SENIOR SOFTWARE ENGINEER, ARCHITECTURE",
     company: "Social Solutions Global",
     location: "Austin, Texas",
-    date: "October 2018 – May 2019",
-    tools: none,
+    date: "October 2018 - May 2019",
     bullets: (
       "Technical Lead for Ecommerce Team",
       "Designed and Led Development on Identity Server with integrated MFA and email Domain verification [Cognito, Lambda]",
@@ -100,8 +92,7 @@
     title: "FULL-STACK SOFTWARE DEVELOPER",
     company: "Social Solutions Global",
     location: "Austin, Texas",
-    date: "May 2018 – October 2018",
-    tools: none,
+    date: "May 2018 - October 2018",
     bullets: (
       "Designed and developed an Enterprise grade (over $1 Million in pipeline per quarter) serverless Ecommerce Platform for SaaS hosted in AWS [CloudFormation, Lambda, DynamoDB]",
       "Designed and developed an Account Management platform for Enterprise SaaS applications. [ECS, Docker, GraphQL]",
@@ -111,8 +102,7 @@
     title: "FULL-STACK SOFTWARE DEVELOPER",
     company: "Axial Commerce",
     location: "Austin, Texas",
-    date: "October 2017 – May 2018",
-    tools: none,
+    date: "October 2017 - May 2018",
     bullets: (
       "Developed and maintained an MVC structured web application with C# .NET Core backend and React.JS frontend, hosted in Azure",
       "Automated CI/CD pipelines for the website/API and apps to the Google Play Store and Apple App Store [Azure Pipelines]",
@@ -122,25 +112,21 @@
     title: "ROBOTICS DEVELOPMENT ENGINEER",
     company: "The Dow Chemical Company",
     location: "Midland, Michigan",
-    date: "Dec 2015 - Oct 2017",
-    tools: none,
+    date: "December 2015 - October 2017",
     bullets: (
       "Developed .NET applications in C# to control and coordinate various types of hardware including robotic arms",
       "Wrote a custom database access layer for handling large, runtime-modified SQL tables from multiple systems",
-      "Setup and Maintained automated CI/CD pipelines through TFS and VSTS for quickly and easily deploying code to robotic systems",
+      "Set up and Maintained automated CI/CD pipelines through TFS and VSTS for quickly and easily deploying code to robotic systems",
     ),
   ),
 )
 
 #let education = (
   (
-    title: "THE UNIVERSITY OF TEXAS",
-    company: "Austin, Texas",
-    location: "",
+    degree: "Bachelors of Engineering: Mechanical Engineering",
+    institution: "The University of Texas",
+    location: "Austin, Texas",
     date: "2011-2015",
-    tools: none,
-    bullets: (
-      "Bachelors of Engineering: Mechanical Engineering",
-    ),
+    details: (),
   ),
 )

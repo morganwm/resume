@@ -1,4 +1,4 @@
-#import "src/templates.typ": header, job, overview, resume, section
+#import "src/templates.typ": education-entry, header, job, overview, project, resume, section
 #import "src/content.typ": education, header-data, overview-description, overview-items, work-experience
 
 #show: resume
@@ -18,24 +18,32 @@
 
 #for job-data in work-experience [
   #job(
-    job-data.title,
+    job-data.at("title", default: ""),
     job-data.company,
     job-data.location,
     job-data.date,
-    job-data.tools,
-    job-data.bullets,
+    job-data.at("tools", default: none),
+    job-data.at("bullets", default: ()),
   )
+  #if "projects" in job-data [
+    #for project-data in job-data.projects [
+      #project(
+        project-data.title,
+        project-data.at("tools", default: none),
+        project-data.at("bullets", default: ()),
+      )
+    ]
+  ]
 ]
 
 #section("Education")
 
 #for edu-data in education [
-  #job(
-    edu-data.title,
-    edu-data.company,
+  #education-entry(
+    edu-data.degree,
+    edu-data.institution,
     edu-data.location,
     edu-data.date,
-    edu-data.tools,
-    edu-data.bullets,
+    edu-data.at("details", default: none),
   )
 ]

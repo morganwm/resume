@@ -52,16 +52,47 @@
   block(breakable: true)[
     #grid(
       columns: (1fr, auto),
-      align(left)[#text(weight: "bold")[#title] -- #company], align(right)[#location -- #date],
+      align(left)[#text(weight: "bold")[#title] -- #company], 
+      align(right)[#text(style: "italic")[#location -- #date]],
     )
     #if tools != none [
-      #v(0.25em)
-      #text(style: "italic")[Tools: #tools]
-      #v(0.25em)
+       #v(-0.5em)
+       #text(size: 8pt, style: "italic")[Tools: #tools]
+       #v(0.25em)
     ]
     #for bullet in bullets [
       - #bullet
     ]
   ]
-  v(1em)
+  v(0.5em)
+}
+
+#let project(title, tools, bullets) = {
+  block(breakable: true, width: 100%)[
+    #text(weight: "bold")[#title]
+    #if tools != none [
+      \ #text(size: 8pt, style: "italic")[Tools: #tools]
+    ]
+    #for bullet in bullets [
+      - #bullet
+    ]
+  ]
+  v(0.5em)
+}
+
+#let education-entry(degree, institution, location, date, details) = {
+  block(breakable: false)[
+    #grid(
+      columns: (1fr, auto),
+      align(left)[#text(weight: "bold")[#degree]],
+      align(right)[#text(style: "italic")[#location -- #date]],
+    )
+    #text(style: "italic")[#institution]
+    #if details != none [
+      #for detail in details [
+        - #detail
+      ]
+    ]
+  ]
+  v(0.5em)
 }
