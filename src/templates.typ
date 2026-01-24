@@ -12,36 +12,31 @@
 }
 
 #let header(name, title_exp, email, phone, github) = {
-  grid(
-    columns: (1fr, 1fr),
-    align(left)[
-      #text(weight: "bold")[#title_exp]
-    ],
-    align(right)[
-      #email | #phone \
-      #link("https://" + github)[#github]
-    ],
-  )
-  v(0.5em)
   align(center)[
-    #text(size: 24pt, weight: "bold")[#name]
+    #text(size: 18pt, weight: "bold")[#name] \
+    #text(size: 10pt, weight: "bold")[#title_exp] \
+    #text(size: 9pt)[#email | #phone | #link("https://" + github)[#github]]
   ]
-  v(0.5em)
 }
 
 #let section(title) = {
-  v(1em)
-  text(size: 14pt, weight: "bold", upper(title))
-  v(-0.5em)
-  line(length: 100%, stroke: 1pt)
-  v(0.5em)
+  v(0.25em)
+  text(size: 11pt, weight: "bold", upper(title))
+  v(-0.8em)
+  line(length: 100%, stroke: 0.5pt)
+  v(0.1em)
 }
 
 #let overview(items, description) = {
-  for item in items [
-    - #item
-  ]
-  v(0.5em)
+  v(0.25em)
+  set text(size: 8.5pt)
+  grid(
+    columns: (1.2fr, 0.9fr, 0.9fr),
+    gutter: 0.5em,
+    ..items.map(item => [- #item])
+  )
+  v(0.25em)
+  set text(size: 10pt)
   block[
     #set par(justify: true)
     #description

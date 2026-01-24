@@ -2,14 +2,14 @@
 
 #let header-data = (
   name: "MORGAN WATSON-MORRIS",
-  title_exp: "Software Engineer | 9 Years Professional Experience",
+  title_exp: "Software Engineer | 10 Years Professional Experience",
   email: "morgan.wm5@gmail.com",
   phone: "(989) 430-8935",
   github: "github.com/morganwm",
 )
 
 #let overview-items = (
-  "5 Years at Apple: Infrastructure/Services on Manufacturing data (Current Job)",
+  "6+ Years at Apple: Infrastructure/Services on Manufacturing data (Current Job)",
   "2 Years at Startups: Application/Services",
   "2 Years at Dow Chemical: Robotics/Automation",
 )
