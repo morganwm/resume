@@ -1,14 +1,11 @@
 {
     "name": "Typst Resume",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "image": "ghcr.io/typst/typst:latest",
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": true,
             "configureZshAsDefaultShell": true,
             "upgradePackages": true
-        },
-        "ghcr.io/devcontainers/features/rust:1": {
-            "version": "latest"
         }
     },
     "customizations": {
@@ -31,6 +28,6 @@
             }
         }
     },
-    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y pkg-config libssl-dev && cargo install typst-cli",
+    "postCreateCommand": "",
     "remoteUser": "vscode"
 }
