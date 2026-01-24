@@ -26,13 +26,13 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ $FILE
+        run: typst compile resume.typ ${{ env.FILE }}
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: resume-pdf
-          path: $FILE
+          path: ${{ env.FILE }}
           retention-days: 30
 
       - name: Attach to Release
