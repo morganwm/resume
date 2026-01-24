@@ -1,5 +1,7 @@
 # Resume
 
+[Download Latest Resume PDF](https://github.com/morganwm/resume/releases/latest/download/morgan_watson-morris_resume.pdf)
+
 A clean, maintainable Typst-based resume with modular structure and CI/CD pipeline.
 
 ## Structure
@@ -21,13 +23,13 @@ Install Typst:
 ### Compile Resume
 
 ```bash
-typst compile resume.typ resume.pdf
+typst compile resume.typ morgan_watson-morris_resume.pdf
 ```
 
 ### Watch Mode (Auto-Compile on Changes)
 
 ```bash
-typst watch resume.typ resume.pdf
+typst watch resume.typ morgan_watson-morris_resume.pdf
 ```
 
 ## Editing
