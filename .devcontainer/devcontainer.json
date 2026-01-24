@@ -28,6 +28,9 @@
                     "Flink",
                     "VSTS"
                 ]
+            },
+            "[typst-code]": {
+                "editor.inlayHints.enabled": "on"
             }
         }
     },
