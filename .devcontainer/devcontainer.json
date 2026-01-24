@@ -20,7 +20,10 @@
                 "tinymist.preview.feature": "tab",
                 "harper.linters.LongSentences": false,
                 "harper.linters.SpellCheck": false,
+                "harper.linters.OrthographicConsistency": false,
+                "harper.linters.SplitWords": false,
                 "cSpell.words": [
+                    "dreamin",
                     "Ecommerce",
                     "Flink",
                     "VSTS"

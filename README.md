@@ -16,6 +16,7 @@ A clean, maintainable Typst-based resume with modular structure and CI/CD pipeli
 ### Prerequisites
 
 Install Typst:
+
 - macOS: `brew install typst`
 - Linux: See [Typst installation guide](https://typst.app/docs/getting-started/installation/)
 - Windows: See [Typst installation guide](https://typst.app/docs/getting-started/installation/)
@@ -35,7 +36,7 @@ typst watch resume.typ morgan_watson-morris_resume.pdf
 ## Editing
 
 - **Update content**: Edit `src/content.typ` - all resume data is stored here
-- **Change styling**: Edit `src/templates.typ` - modify functions to adjust layout, fonts, spacing
+- **Change styling**: Edit `src/templates.typ` - modify functions to adjust lay out, fonts, spacing
 - **Structure changes**: Edit `resume.typ` - change the order or add/remove sections
 
 ## CI/CD
@@ -62,6 +63,7 @@ git push origin v1.0.0
 ## File Organization
 
 The modular structure makes it easy to:
+
 - Update content without touching templates
 - Adjust styling without modifying content
 - Add new sections or reorganize the resume

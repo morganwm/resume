@@ -13,6 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      FILE: morgan_watson-morris_resume.pdf
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,26 +26,26 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ morgan_watson-morris_resume.pdf
+        run: typst compile resume.typ $FILE
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: resume-pdf
-          path: morgan_watson-morris_resume.pdf
+          path: $FILE
           retention-days: 30
 
       - name: Attach to Release
         if: github.event_name == 'release'
         uses: actions/github-script@v7
+
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: morgan_watson-morris_resume.pdf
           script: |
             const fs = require("fs").promises;
             const { repo: { owner, repo }, sha } = context;
 
-            const file = process.env.INPUT_FILE;
+            const file = ${{ env.FILE }};
 
             const release = await github.rest.repos.getReleaseByTag({
               owner, repo,
