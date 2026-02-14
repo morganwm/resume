@@ -29,18 +29,19 @@
     projects: (
       (
         title: "Design and Implementation of Large Scale Data Ingestion and Movement for Apple Manufacturing Data",
-        tools: "Golang, Linux tooling, Docker, AWS S3, Python, Kafka, and exploration in Flink",
+        tools: "Golang, Linux tooling, Docker, AWS (S3, IAM), Python, Kafka, and exploration in Flink",
         bullets: (
           "Led Discovery and Requirements gathering from various hardware and testing customers",
           "Led Research into existing network and compute infrastructure at manufacturing sites",
           "Designed and Built a lightweight daemon in Go with tunable performance characteristics for use at manufacturing sites",
           "Designed a fault tolerant system for coordinating the daemons running remotely on-sites",
           "Built an initial MVP which served to collect several terabytes of targeted data for compliance and research purposes",
+          "Worked with AWS Solutions Experts to design and implement 'IAM Credential Vending' to restrict access to S3 data dynamically"
         ),
       ),
       (
         title: "Proof of Concept with AI/ML team for use of Ray with Data Analysis/Visualization Platform",
-        tools: "Python, Ray, Docker/Containers, CI/CD",
+        tools: "Python, Ray, Docker/Containers, S3, Parquet, Reddis, CI/CD",
         bullets: (
           "Built Python library to wrap/shim existing tools for use with Ray Model Endpoint as a Service",
           "Developed sets of tools to connect Ray to our custom indexing and search for use with S3/Iceberg Data Lakehouse",
@@ -49,7 +50,7 @@
       ),
       (
         title: "Implementation of Data Lakehouse Platform for extremely large-scale analytics on Apple Manufacturing Data",
-        tools: "Jupyter, Python, Spark, Kubernetes, Docker/Containers, AWS (EKS, EC2, S3, IAM)",
+        tools: "Jupyter, Python, Spark, Kubernetes, Docker/Containers, Iceberg, Parquet, AWS (EKS, EC2, S3, IAM)",
         bullets: (
           "Led coordination across teams to set up custom monitoring to ensure consistent performance.",
           "Worked with AWS to optimize node packing to reduce idle compute.",
