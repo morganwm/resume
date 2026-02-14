@@ -28,13 +28,16 @@
 }
 
 #let overview(items, description) = {
-  v(0.25em)
-  set text(size: 8.5pt)
-  grid(
-    columns: (1.2fr, 0.9fr, 0.9fr),
-    gutter: 0.5em,
-    ..items.map(item => [- #item])
-  )
+  if items != none {
+    v(0.25em)
+    set text(size: 8.5pt)
+    grid(
+      columns: (1.2fr, 0.9fr, 0.9fr),
+      gutter: 0.5em,
+      ..items.map(item => [- #item])
+    )
+  }
+
   v(0.25em)
   set text(size: 10pt)
   block[

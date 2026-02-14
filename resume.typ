@@ -12,7 +12,7 @@
 )
 
 #section("Overview")
-#overview(overview-items, overview-description)
+#overview(none, overview-description)
 
 #section("Work Experience")
 
