@@ -82,49 +82,57 @@
   ),
 )
 
+#let social-solutions-sr = (
+  title: "Senior Software Engineer, Architecture",
+  company: "Social Solutions Global",
+  location: "Austin, Texas",
+  date: "October 2018 - May 2019",
+  bullets: (
+    "Technical Lead for Ecommerce Team",
+    "Designed and Led Development on Identity Server with integrated MFA and email Domain verification [Cognito, Lambda]",
+  ),
+)
+
+#let social-solutions-dev = (
+  title: "Full-Stack Software Developer",
+  company: "Social Solutions Global",
+  location: "Austin, Texas",
+  date: "May 2018 - October 2018",
+  bullets: (
+    "Designed and developed an Enterprise grade (over $1 Million in pipeline per quarter) serverless Ecommerce Platform for SaaS hosted in AWS [CloudFormation, Lambda, DynamoDB]",
+    "Designed and developed an Account Management platform for Enterprise SaaS applications. [ECS, Docker, GraphQL]",
+  ),
+)
+
+#let axial = (
+  title: "Full-Stack Software Developer",
+  company: "Axial Commerce",
+  location: "Austin, Texas",
+  date: "October 2017 - May 2018",
+  bullets: (
+    "Developed and maintained an MVC structured web application with C# .NET Core backend and React.JS frontend, hosted in Azure",
+    "Automated CI/CD pipelines for the website/API and apps to the Google Play Store and Apple App Store [Azure Pipelines]",
+  ),
+)
+
+#let dow = (
+  title: "Robotics Development Engineer",
+  company: "The Dow Chemical Company",
+  location: "Midland, Michigan",
+  date: "December 2015 - October 2017",
+  bullets: (
+    "Developed .NET applications in C# to control and coordinate various types of hardware including robotic arms",
+    "Wrote a custom database access layer for handling large, runtime-modified SQL tables from multiple systems",
+    "Set up and Maintained automated CI/CD pipelines through TFS and VSTS for quickly and easily deploying code to robotic systems",
+  ),
+)
+
 #let work-experience = (
   apple,
-  (
-    title: "Senior Software Engineer, Architecture",
-    company: "Social Solutions Global",
-    location: "Austin, Texas",
-    date: "October 2018 - May 2019",
-    bullets: (
-      "Technical Lead for Ecommerce Team",
-      "Designed and Led Development on Identity Server with integrated MFA and email Domain verification [Cognito, Lambda]",
-    ),
-  ),
-  (
-    title: "Full-Stack Software Developer",
-    company: "Social Solutions Global",
-    location: "Austin, Texas",
-    date: "May 2018 - October 2018",
-    bullets: (
-      "Designed and developed an Enterprise grade (over $1 Million in pipeline per quarter) serverless Ecommerce Platform for SaaS hosted in AWS [CloudFormation, Lambda, DynamoDB]",
-      "Designed and developed an Account Management platform for Enterprise SaaS applications. [ECS, Docker, GraphQL]",
-    ),
-  ),
-  (
-    title: "Full-Stack Software Developer",
-    company: "Axial Commerce",
-    location: "Austin, Texas",
-    date: "October 2017 - May 2018",
-    bullets: (
-      "Developed and maintained an MVC structured web application with C# .NET Core backend and React.JS frontend, hosted in Azure",
-      "Automated CI/CD pipelines for the website/API and apps to the Google Play Store and Apple App Store [Azure Pipelines]",
-    ),
-  ),
-  (
-    title: "Robotics Development Engineer",
-    company: "The Dow Chemical Company",
-    location: "Midland, Michigan",
-    date: "December 2015 - October 2017",
-    bullets: (
-      "Developed .NET applications in C# to control and coordinate various types of hardware including robotic arms",
-      "Wrote a custom database access layer for handling large, runtime-modified SQL tables from multiple systems",
-      "Set up and Maintained automated CI/CD pipelines through TFS and VSTS for quickly and easily deploying code to robotic systems",
-    ),
-  ),
+  social-solutions-sr,
+  social-solutions-dev,
+  axial,
+  dow,
 )
 
 #let education = (
