@@ -20,8 +20,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - uses: fontist/setup-fontist@v2
-      - run: fontist install "TeX"
+      - name: Install Tex live
+        uses: paolobrasolin/setup-texlive-action@v1
+      
+      - name: Install TeX Gyre fonts
+        run: tlmgr install tex-gyre
 
       - name: Install Typst
         uses: typst-community/setup-typst@v2
@@ -29,7 +32,7 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ ${{ env.FILE }} --font-path ~/.fontist/fonts
+        run: typst compile resume.typ ${{ env.FILE }}
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4

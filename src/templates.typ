@@ -6,7 +6,7 @@
     margin: (x: 0.5in, y: 0.5in),
     paper: "us-letter",
   )
-  set text(font: ("TeXGyreHeros", "TeX Gyre Heros"), style: "normal", weight: 400, size: 10pt)
+  set text(font: ("Libertinus Serif", "TeX Gyre Heros"), style: "normal", weight: 400, size: 10pt)
 
   body
 }
