@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      FILE: morgan_watson_morris_resume.pdf
+      FILE: morgan_watson-morris_resume.pdf
 
     steps:
       - name: Checkout repository
