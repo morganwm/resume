@@ -14,11 +14,14 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      FILE: morgan_watson-morris_resume.pdf
+      FILE: morgan_watson_morris_resume.pdf
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - uses: fontist/setup-fontist@v2
+      - run: fontist install "Fira Code"
 
       - name: Install Typst
         uses: typst-community/setup-typst@v2
@@ -26,7 +29,7 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ ${{ env.FILE }}
+        run: typst compile resume.typ ${{ env.FILE }} --font-path ~/.fontist/fonts
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4

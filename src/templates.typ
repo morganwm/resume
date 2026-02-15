@@ -6,7 +6,7 @@
     margin: (x: 0.5in, y: 0.5in),
     paper: "us-letter",
   )
-  set text(font: "Helvetica", size: 10pt)
+  set text(font: ("TeXGyreHeros", "TeX Gyre Heros"), style: "normal", weight: 400, size: 10pt)
 
   body
 }
@@ -50,13 +50,12 @@
   block(breakable: true)[
     #grid(
       columns: (1fr, auto),
-      align(left)[#text(weight: "bold")[#title] -- #company], 
-      align(right)[#text(style: "italic")[#location -- #date]],
+      align(left)[#text(weight: "bold")[#title] -- #company], align(right)[#text(style: "italic")[#location -- #date]],
     )
     #if tools != none [
-       #v(-0.5em)
-       #text(size: 8pt, style: "italic")[Tools: #tools]
-       #v(0.25em)
+      #v(-0.5em)
+      #text(size: 8pt, style: "italic")[Tools: #tools]
+      #v(0.25em)
     ]
     #for bullet in bullets [
       - #bullet
@@ -82,8 +81,7 @@
   block(breakable: false)[
     #grid(
       columns: (1fr, auto),
-      align(left)[#text(weight: "bold")[#degree]],
-      align(right)[#text(style: "italic")[#location -- #date]],
+      align(left)[#text(weight: "bold")[#degree]], align(right)[#text(style: "italic")[#location -- #date]],
     )
     #text(style: "italic")[#institution]
     #if details != none [
