@@ -48,7 +48,7 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ ${{ env.FILE }} --font-path ~/tex_gyre_hero_fonts
+        run: typst compile resume.typ ${{ env.FILE }} --font-path ./tex_gyre_hero_fonts
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
