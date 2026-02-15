@@ -67,7 +67,7 @@ jobs:
             const fs = require("fs").promises;
             const { repo: { owner, repo }, sha } = context;
 
-            const file = ${{ env.FILE }};
+            const file = "${{ env.FILE }}";
 
             const release = await github.rest.repos.getReleaseByTag({
               owner, repo,
