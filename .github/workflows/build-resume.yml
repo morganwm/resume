@@ -19,12 +19,28 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Install Tex live
-        uses: paolobrasolin/setup-texlive-action@v1
       
-      - name: Install TeX Gyre fonts
-        run: tlmgr install tex-gyre
+      - name: Download and Unzip Archive
+        run: |
+          # Define variables for clarity
+          DOWNLOAD_URL="https://www.gust.org.pl/projects/e-foundry/tex-gyre/heros/qhv2.004otf.zip"
+          OUTPUT_FILE="tex-gyre-hero.zip"
+          EXTRACT_DIR="tex_gyre_hero_fonts"
+
+          # Use curl to download the file to the specified output file
+          curl -sSL "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
+
+          # Create the extraction directory
+          mkdir -p "$EXTRACT_DIR"
+
+          # Unzip the archive into the specified directory
+          unzip "$OUTPUT_FILE" -d "$EXTRACT_DIR"
+
+          # Optional: Remove the downloaded zip file
+          rm "$OUTPUT_FILE"
+          
+      - name: Verify extracted files
+        run: ls -R tex_gyre_hero_fonts
 
       - name: Install Typst
         uses: typst-community/setup-typst@v2
@@ -32,7 +48,7 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ ${{ env.FILE }}
+        run: typst compile resume.typ ${{ env.FILE }} --font-path ~/tex_gyre_hero_fonts
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
