@@ -43,8 +43,6 @@
   #education-entry(
     edu-data.degree,
     edu-data.institution,
-    edu-data.location,
     edu-data.date,
-    edu-data.at("details", default: none),
   )
 ]

@@ -47,10 +47,10 @@
 }
 
 #let job(title, company, location, date, tools, bullets) = {
-  block(breakable: true)[
+  block(breakable: false)[
     #grid(
       columns: (1fr, auto),
-      align(left)[#text(weight: "bold")[#title] -- #company], align(right)[#text(style: "italic")[#location -- #date]],
+      align(left)[#text(weight: "bold")[#title] -- #company], align(right)[#text(style: "italic")[#location | #date]],
     )
     #if tools != none [
       #v(-0.5em)
@@ -77,18 +77,10 @@
   v(0.5em)
 }
 
-#let education-entry(degree, institution, location, date, details) = {
+#let education-entry(degree, institution, date) = {
   block(breakable: false)[
-    #grid(
-      columns: (1fr, auto),
-      align(left)[#text(weight: "bold")[#degree]], align(right)[#text(style: "italic")[#location -- #date]],
-    )
-    #text(style: "italic")[#institution]
-    #if details != none [
-      #for detail in details [
-        - #detail
-      ]
-    ]
+    #text(weight: "bold")[#degree] \
+    #text(style: "italic")[#institution] | #date
   ]
   v(0.5em)
 }
