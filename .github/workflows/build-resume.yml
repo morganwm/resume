@@ -40,7 +40,7 @@ jobs:
           rm "$OUTPUT_FILE"
           
       - name: Verify extracted files
-        run: ls -R tex_gyre_hero_fonts
+        run: ls -R fonts
 
       - name: Install Typst
         uses: typst-community/setup-typst@v2
