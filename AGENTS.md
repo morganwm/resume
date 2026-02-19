@@ -2,12 +2,12 @@
 
 ## Goal
 
-Create a Typst resume mirroring `Morgan Watson-Morris - Resume as of 11-06-2024.pdf`.
+Maintain a Typst resume where `src/content.typ` is the source of truth and `src/templates.typ` defines the visual layout.
 
 ## Constraints
 
-- **Content**: Exact wording for experience is required. Only typos should be fixed.
-- **Style**: Match the visual style of the original PDF (layout, fonts, spacing).
+- **Content**: `src/content.typ` is authoritative. Preserve existing wording unless explicitly asked to rewrite; fix typos freely.
+- **Style**: Keep the resume clean and consistent; prefer small, iterative layout changes.
 - **Tooling**: Use `typst` CLI to compile and verify.
 
 ## Best Practices for Typst
@@ -19,9 +19,9 @@ Create a Typst resume mirroring `Morgan Watson-Morris - Resume as of 11-06-2024.
 
 ## Workflow
 
-1. **Extraction**: Get the raw text from the PDF to ensure accuracy.
-2. **Templating**: Create the visual structure in Typst.
-3. **Population**: Fill in the content.
+1. **Content**: Update resume data in `src/content.typ`.
+2. **Templating**: Adjust layout/components in `src/templates.typ`.
+3. **Composition**: Reorder/add sections in `resume.typ` as needed.
 4. **Verification**: Compile and check for errors.
 
 ## Project Structure
@@ -29,7 +29,6 @@ Create a Typst resume mirroring `Morgan Watson-Morris - Resume as of 11-06-2024.
 - `resume.typ`: Main source file (entry point).
 - `src/content.typ`: Resume content data.
 - `src/templates.typ`: Visual styling and component functions.
-- `base/`: Directory containing original resume files and extracted text.
 - `AGENTS.md`: This file.
 
 ## Compilation

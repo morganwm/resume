@@ -9,7 +9,6 @@ A clean, maintainable Typst-based resume with modular structure and CI/CD pipeli
 - `resume.typ` - Main entry point that imports templates and content
 - `src/templates.typ` - Reusable template functions (header, section, job, etc.)
 - `src/content.typ` - All resume content data (header info, work experience, education)
-- `base/` - Original resume documents and text extracts
 
 ## Local Development
 
