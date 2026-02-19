@@ -25,10 +25,10 @@ jobs:
           # Define variables for clarity
           DOWNLOAD_URL="https://www.gust.org.pl/projects/e-foundry/tex-gyre/heros/qhv2.004otf.zip"
           OUTPUT_FILE="tex-gyre-hero.zip"
-          EXTRACT_DIR="tex_gyre_hero_fonts"
+          EXTRACT_DIR="fonts"
 
           # Use curl to download the file to the specified output file
-          curl -sSL "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
+          curl -L "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
 
           # Create the extraction directory
           mkdir -p "$EXTRACT_DIR"
@@ -48,7 +48,7 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ ${{ env.FILE }} --font-path ./tex_gyre_hero_fonts
+        run: typst compile resume.typ ${{ env.FILE }} --font-path ./fonts
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
