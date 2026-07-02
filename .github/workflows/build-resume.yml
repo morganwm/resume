@@ -13,14 +13,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        # Keys from the overviews dictionary in src/content.typ
+        company: [base, temporal, chainguard, overland, gable, stoke]
+
     env:
-      FILE: morgan_watson-morris_resume.pdf
+      FILE_BASE: morgan_watson-morris_resume
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
+      - name: Cache fonts
+        id: font-cache
+        uses: actions/cache@v4
+        with:
+          path: fonts
+          key: tex-gyre-heros-qhv2.004otf
+
       - name: Download and Unzip Archive
+        if: steps.font-cache.outputs.cache-hit != 'true'
         run: |
           # Define variables for clarity
           DOWNLOAD_URL="https://www.gust.org.pl/projects/e-foundry/tex-gyre/heros/qhv2.004otf.zip"
@@ -28,7 +41,9 @@ jobs:
           EXTRACT_DIR="fonts"
 
           # Use curl to download the file to the specified output file
-          curl -L "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
+          # (retry transient failures — the mirror can be slow when several
+          # cache-missing matrix jobs hit it at once)
+          curl -L --fail --retry 5 --retry-all-errors --connect-timeout 15 "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
 
           # Create the extraction directory
           mkdir -p "$EXTRACT_DIR"
@@ -38,7 +53,7 @@ jobs:
 
           # Optional: Remove the downloaded zip file
           rm "$OUTPUT_FILE"
-          
+
       - name: Verify extracted files
         run: ls -R fonts
 
@@ -48,13 +63,21 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ ${{ env.FILE }} --font-path ./fonts
+        run: |
+          if [ "${{ matrix.company }}" = "base" ]; then
+            PDF="${FILE_BASE}.pdf"
+          else
+            PDF="${FILE_BASE}_${{ matrix.company }}.pdf"
+          fi
+          echo "PDF=$PDF" >> "$GITHUB_ENV"
+
+          typst compile resume.typ "$PDF" --font-path ./fonts --input company=${{ matrix.company }}
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: resume-pdf
-          path: ${{ env.FILE }}
+          name: resume-pdf-${{ matrix.company }}
+          path: ${{ env.PDF }}
           retention-days: 30
 
       - name: Attach to Release
@@ -65,14 +88,14 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require("fs").promises;
-            const { repo: { owner, repo }, sha } = context;
-
-            const file = "${{ env.FILE }}";
+            const { repo: { owner, repo } } = context;
 
             const release = await github.rest.repos.getReleaseByTag({
               owner, repo,
               tag: process.env.GITHUB_REF.replace("refs/tags/", ""),
             });
+
+            const file = process.env.PDF;
 
             console.log("Release:", { release });
             console.log("File:", { file })

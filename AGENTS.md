@@ -34,3 +34,5 @@ Maintain a Typst resume where `src/content.typ` is the source of truth and `src/
 ## Compilation
 
 Run `typst compile resume.typ` to generate the PDF.
+
+Company-specific variants swap only the overview paragraph: `typst compile resume.typ --input company=<key>`, where `<key>` is a key of the `overviews` dictionary in `src/content.typ` (defaults to `base`). CI builds every variant in the `company` matrix in `.github/workflows/build-resume.yml`; keep that list in sync with the dictionary.
