@@ -41,7 +41,9 @@ jobs:
           EXTRACT_DIR="fonts"
 
           # Use curl to download the file to the specified output file
-          curl -L "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
+          # (retry transient failures — the mirror can be slow when several
+          # cache-missing matrix jobs hit it at once)
+          curl -L --fail --retry 5 --retry-all-errors --connect-timeout 15 "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
 
           # Create the extraction directory
           mkdir -p "$EXTRACT_DIR"
