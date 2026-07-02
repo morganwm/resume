@@ -15,6 +15,8 @@ jobs:
 
     env:
       FILE: morgan_watson-morris_resume.pdf
+      # Keys from the overviews dictionary in src/content.typ (besides base)
+      VARIANTS: temporal chainguard overland gable stoke
 
     steps:
       - name: Checkout repository
@@ -48,13 +50,18 @@ jobs:
           version: latest
 
       - name: Compile resume
-        run: typst compile resume.typ ${{ env.FILE }} --font-path ./fonts
+        run: |
+          typst compile resume.typ ${{ env.FILE }} --font-path ./fonts
+
+          for company in ${{ env.VARIANTS }}; do
+            typst compile resume.typ "${FILE%.pdf}_${company}.pdf" --font-path ./fonts --input company="$company"
+          done
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: resume-pdf
-          path: ${{ env.FILE }}
+          path: morgan_watson-morris_resume*.pdf
           retention-days: 30
 
       - name: Attach to Release
@@ -67,19 +74,24 @@ jobs:
             const fs = require("fs").promises;
             const { repo: { owner, repo }, sha } = context;
 
-            const file = "${{ env.FILE }}";
-
             const release = await github.rest.repos.getReleaseByTag({
               owner, repo,
               tag: process.env.GITHUB_REF.replace("refs/tags/", ""),
             });
 
             console.log("Release:", { release });
-            console.log("File:", { file })
 
-            await github.rest.repos.uploadReleaseAsset({
-              owner, repo,
-              release_id: release.data.id,
-              name: file,
-              data: await fs.readFile(file),
-            });
+            const files = (await fs.readdir(".")).filter(
+              (f) => f.startsWith("morgan_watson-morris_resume") && f.endsWith(".pdf"),
+            );
+
+            for (const file of files) {
+              console.log("Uploading:", { file });
+
+              await github.rest.repos.uploadReleaseAsset({
+                owner, repo,
+                release_id: release.data.id,
+                name: file,
+                data: await fs.readFile(file),
+              });
+            }

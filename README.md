@@ -26,6 +26,19 @@ Install Typst:
 typst compile resume.typ morgan_watson-morris_resume.pdf
 ```
 
+### Company Variants
+
+The overview paragraph can be swapped per company at compile time. The available
+variants are the keys of the `overviews` dictionary in `src/content.typ`:
+
+```bash
+typst compile resume.typ morgan_watson-morris_resume_temporal.pdf --input company=temporal
+```
+
+Omitting `--input company=...` builds the generic (`base`) resume. To add a
+variant, add a key to `overviews` and (to get it built in CI) add it to the
+`VARIANTS` list in `.github/workflows/build-resume.yml`.
+
 ### Watch Mode (Auto-Compile on Changes)
 
 ```bash
@@ -42,9 +55,9 @@ typst watch resume.typ morgan_watson-morris_resume.pdf
 
 The repository includes a GitHub Actions workflow (`.github/workflows/build-resume.yml`) that:
 
-- Automatically compiles the resume on push to main/master
-- Creates a PDF artifact that can be downloaded
-- Creates a release with the PDF when you push a tag
+- Automatically compiles the resume (base + all company variants) on push to main/master
+- Publishes all PDFs as a workflow artifact that can be downloaded
+- Attaches all PDFs to the release when you push a tag (the download link above always points to the base resume)
 
 ### Manual Workflow Trigger
 
