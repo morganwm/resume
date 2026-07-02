@@ -37,7 +37,7 @@ typst compile resume.typ morgan_watson-morris_resume_temporal.pdf --input compan
 
 Omitting `--input company=...` builds the generic (`base`) resume. To add a
 variant, add a key to `overviews` and (to get it built in CI) add it to the
-`VARIANTS` list in `.github/workflows/build-resume.yml`.
+`company` matrix in `.github/workflows/build-resume.yml`.
 
 ### Watch Mode (Auto-Compile on Changes)
 
@@ -55,8 +55,8 @@ typst watch resume.typ morgan_watson-morris_resume.pdf
 
 The repository includes a GitHub Actions workflow (`.github/workflows/build-resume.yml`) that:
 
-- Automatically compiles the resume (base + all company variants) on push to main/master
-- Publishes all PDFs as a workflow artifact that can be downloaded
+- Automatically compiles the resume (base + all company variants, one matrix job each) on push to main/master
+- Publishes each PDF as its own workflow artifact (`resume-pdf-<company>`)
 - Attaches all PDFs to the release when you push a tag (the download link above always points to the base resume)
 
 ### Manual Workflow Trigger
