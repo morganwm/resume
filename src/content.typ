@@ -79,10 +79,10 @@
   date: "May 2018 - May 2019",
   tools: "Node, Docker, GraphQL, React, AWS (Cognito, Lambda, ECS, DynamoDB, CloudFormation, CloudWatch, CloudTrail)",
   bullets: (
-    "Technical Lead for Ecommerce Team",
-    "Designed and Led Development on Identity Server with integrated MFA and email Domain verification",
-    "Designed and developed an Enterprise grade (over $1 Million in pipeline per quarter) serverless Ecommerce Platform for SaaS hosted in AWS",
-    "Designed and developed an Account Management platform for Enterprise SaaS applications.",
+    "Technical lead for ecommerce team",
+    "Designed and led development on identity server with integrated MFA and email domain verification",
+    "Designed and developed an enterprise-grade (over $1 million in pipeline per quarter) serverless ecommerce platform for SaaS, hosted in AWS",
+    "Designed and developed an account management platform for enterprise SaaS applications",
   ),
 )
 
@@ -94,7 +94,7 @@
   tools: "C# Dotnet Core, React, Azure Pipelines",
   bullets: (
     "Developed and maintained an MVC structured web application with C# .NET Core backend and React.JS frontend, hosted in Azure",
-    "Automated CI/CD pipelines for the website/API and apps to the Google Play Store and Apple App Store",
+    "Automated CI/CD pipelines for the website/API and apps to the Google Play Store and App Store",
   ),
 )
 
@@ -106,7 +106,7 @@
   bullets: (
     "Developed .NET applications in C# to control and coordinate various types of hardware including robotic arms",
     "Wrote a custom database access layer for handling large, runtime-modified SQL tables from multiple systems",
-    "Set up and Maintained automated CI/CD pipelines through TFS and VSTS for quickly and easily deploying code to robotic systems",
+    "Set up and maintained automated CI/CD pipelines through TFS and VSTS for quickly and easily deploying code to robotic systems",
   ),
 )
 
@@ -120,7 +120,7 @@
 #let education = (
   (
     degree: "B.S. Mechanical Engineering",
-    institution: "The University of Texas as Austin",
+    institution: "The University of Texas at Austin",
     date: "2015",
   ),
 )

@@ -65,7 +65,7 @@
 }
 
 #let project(title, tools, bullets) = {
-  block(breakable: true, width: 100%)[
+  block(breakable: false, width: 100%)[
     #text(weight: "bold")[#title]
     #if tools != none [
       \ #text(size: 8pt, style: "italic")[Tools: #tools]

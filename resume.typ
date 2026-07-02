@@ -1,5 +1,5 @@
 #import "src/templates.typ": education-entry, header, job, overview, project, resume, section
-#import "src/content.typ": education, header-data, overview-description, overview-items, work-experience
+#import "src/content.typ": education, header-data, overview-description, work-experience
 
 #show: resume
 
@@ -12,7 +12,6 @@
 )
 
 #section("Overview")
-// #overview(overview-items, overview-description)
 #overview(none, overview-description)
 
 #section("Work Experience")
