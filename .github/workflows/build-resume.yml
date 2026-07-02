@@ -9,28 +9,23 @@ on:
   release:
     types: [published]
 
+env:
+  FONT_CACHE_KEY: tex-gyre-heros-qhv2.004otf
+
 jobs:
-  build:
+  # Download the fonts once per run (cache-backed) so the matrix jobs never
+  # hit the font mirror themselves — six simultaneous cold-cache downloads
+  # were getting connections refused.
+  fonts:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        # Keys from the overviews dictionary in src/content.typ
-        company: [base, temporal, chainguard, overland, gable, stoke]
-
-    env:
-      FILE_BASE: morgan_watson-morris_resume
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Cache fonts
         id: font-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: fonts
-          key: tex-gyre-heros-qhv2.004otf
+          key: ${{ env.FONT_CACHE_KEY }}
 
       - name: Download and Unzip Archive
         if: steps.font-cache.outputs.cache-hit != 'true'
@@ -41,8 +36,7 @@ jobs:
           EXTRACT_DIR="fonts"
 
           # Use curl to download the file to the specified output file
-          # (retry transient failures — the mirror can be slow when several
-          # cache-missing matrix jobs hit it at once)
+          # (retry transient failures — the mirror can be slow)
           curl -L --fail --retry 5 --retry-all-errors --connect-timeout 15 "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
 
           # Create the extraction directory
@@ -57,10 +51,33 @@ jobs:
       - name: Verify extracted files
         run: ls -R fonts
 
-      - name: Install Typst
-        uses: typst-community/setup-typst@v2
+  build:
+    runs-on: ubuntu-latest
+    needs: fonts
+
+    strategy:
+      matrix:
+        # Keys from the overviews dictionary in src/content.typ
+        company: [base, temporal, chainguard, overland, gable, stoke]
+
+    env:
+      FILE_BASE: morgan_watson-morris_resume
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Restore fonts
+        uses: actions/cache/restore@v6
         with:
-          version: latest
+          path: fonts
+          key: ${{ env.FONT_CACHE_KEY }}
+          fail-on-cache-miss: true
+
+      - name: Install Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          typst-version: latest
 
       - name: Compile resume
         run: |
@@ -74,7 +91,7 @@ jobs:
           typst compile resume.typ "$PDF" --font-path ./fonts --input company=${{ matrix.company }}
 
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: resume-pdf-${{ matrix.company }}
           path: ${{ env.PDF }}
@@ -82,7 +99,7 @@ jobs:
 
       - name: Attach to Release
         if: github.event_name == 'release'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
 
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
