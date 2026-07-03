@@ -1,21 +1,27 @@
 #import "src/templates.typ": education-entry, header, job, overview, project, resume, section
 #import "src/content.typ": education, header-data, overview-description, work-experience
 
+#let input-enabled(name) = sys.inputs.at(name, default: "true") != "false"
+#let include-header = input-enabled("header")
+#let include-footer = input-enabled("footer")
+
 #show: resume.with(
   name: header-data.name,
   title: header-data.title,
   email: header-data.email,
-  header: true,
-  footer: true,
+  header: include-header,
+  footer: include-footer,
 )
 
-#header(
-  header-data.name,
-  header-data.title_exp,
-  header-data.email,
-  header-data.phone,
-  header-data.github,
-)
+#if include-header [
+  #header(
+    header-data.name,
+    header-data.title_exp,
+    header-data.email,
+    header-data.phone,
+    header-data.github,
+  )
+]
 
 #section("Overview")
 #overview(none, overview-description)
