@@ -1,7 +1,13 @@
 #import "src/templates.typ": education-entry, header, job, overview, project, resume, section
 #import "src/content.typ": education, header-data, overview-description, work-experience
 
-#show: resume
+#show: resume.with(
+  name: header-data.name,
+  title: header-data.title,
+  email: header-data.email,
+  header: true,
+  footer: true,
+)
 
 #header(
   header-data.name,
@@ -29,6 +35,7 @@
     #for project-data in job-data.projects [
       #project(
         project-data.title,
+        project-data.at("name", default: none),
         project-data.at("tools", default: none),
         project-data.at("bullets", default: ()),
       )

@@ -1,8 +1,11 @@
 // Resume content data
 
+#let job-title = "Software Engineer"
+
 #let header-data = (
   name: "Morgan Watson-Morris",
-  title_exp: "Software Engineer | 10 Years Professional Experience",
+  title: job-title,
+  title_exp: job-title + " | 10 Years Professional Experience",
   email: "morgan@morganw.com",
   phone: "(989) 430-8935",
   github: "github.com/morganwm",
@@ -48,6 +51,7 @@
 
 #let bear = (
   title: "Distributed Data Ingestion & Edge Systems",
+  name: "Bear",
   bullets: (
     "Designed and implemented lightweight Go daemon deployed to secure manufacturing sites for high-volume data extraction",
     "Architected fault-tolerant coordination system for distributed edge nodes",
@@ -59,6 +63,7 @@
 
 #let ipa-ray = (
   title: "ML Enablement & Ray Platform POC",
+  name: "IPA",
   bullets: (
     "Built Python abstractions enabling Ray-based distributed analysis",
     "Integrated Ray with custom search/indexing over Iceberg/S3",
@@ -68,6 +73,7 @@
 
 #let insight-lab = (
   title: "Large-Scale Analytics & Lakehouse Architecture",
+  name: "Insight Lab",
   bullets: (
     "Co-led implementation of Iceberg-based data lakehouse for manufacturing analytics at scale",
     "Optimized Kubernetes node packing with AWS to reduce idle compute costs",
@@ -78,6 +84,7 @@
 
 #let argus = (
   title: "Highly Available/Scalable Real-Time ML & Inference Infrastructure",
+  name: "Argus",
   bullets: (
     "Architected real-time ML pipeline capable of executing arbitrary containerized models",
     "Built ELT pipelines for structured aggregation of manufacturing telemetry",
