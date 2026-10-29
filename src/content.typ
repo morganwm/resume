@@ -57,6 +57,7 @@
     "Partnered with stakeholders to codify complex business rules into standardized, strongly typed schemas",
     "Spearheaded an audit logging and configuration management system for versioned, traceable rule deployments",
     "Compiled the engine to WebAssembly (WASM) to enable live, in-browser testing and debugging of rule configurations",
+    "Integrated GenAI tooling to help simplify rules, business logic, and observability insights for users",
   ),
 )
 
@@ -104,14 +105,24 @@
   ),
 )
 
-#let apple = (
+#let apple-sds = (
+  title: "Software Engineer",
+  company: "Apple (Strategic Data Solutions - Physical Goods)",
+  location: "Seattle, Washington",
+  date: "October 2025 - Present",
+  tools: "Python (uv), Cassandra/Custom Platform Tools, Containers, Iceberg, Snowflake",
+  projects: (
+    sde,
+  ),
+)
+
+#let apple-insight = (
   title: "Software Engineer",
   company: "Apple (Manufacturing Data Insight)",
   location: "Austin, Texas",
-  date: "May 2019 - Present",
+  date: "May 2019 - October 2025",
   tools: "Go, Python, Kubernetes, Docker, AWS (EKS, EC2, S3, IAM), Linux Tooling, Kafka, Spark, Iceberg, Ray, Rust, Prometheus, Grafana",
   projects: (
-    sde,
     bear,
     ipa-ray,
     insight-lab,
@@ -157,7 +168,8 @@
 )
 
 #let work-experience = (
-  apple,
+  apple-sds,
+  apple-insight,
   social-solutions,
   axial,
   dow,
