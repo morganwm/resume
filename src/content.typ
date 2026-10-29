@@ -34,10 +34,10 @@
     Senior Software Engineer specializing in real-time ML infrastructure, edge systems, and sensor data platforms, with roots in industrial robotics. 10+ years building fault-tolerant edge daemons, real-time inference pipelines for arbitrary containerized models, and large-scale telemetry ingestion in AWS/Kubernetes. Began career developing control software for robotic systems; deeply comfortable where software meets hardware in the field.
   ],
   gable: [
-    Senior Software Engineer specializing in data platforms, data quality at scale, and the boundary between data producers and consumers. 10+ years building ingestion pipelines, Iceberg-based lakehouse architecture, and analytics infrastructure in AWS/Kubernetes, including compliance-grade data collection where schema correctness and ownership are non-negotiable. Experienced partner to both the engineers producing data and the researchers consuming it.
+    Senior Software Engineer specializing in data platforms, schema quality at scale, and the boundary between producers and consumers. 10+ years building ingestion pipelines, Iceberg-based lakehouse architecture, and analytics infrastructure in AWS/Kubernetes, including compliance-grade collection where schema correctness and ownership are non-negotiable. Experienced partner to both the engineers generating telemetry and the researchers consuming it.
   ],
   stoke: [
-    Senior Software Engineer specializing in manufacturing and test data systems, analytics platforms, and real-time telemetry, with a mechanical engineering foundation. 10+ years building high-throughput ingestion, lakehouse analytics, and monitoring and visualization stacks (Prometheus, Grafana) in AWS/Kubernetes. Began career in industrial robotics and hardware automation; fluent in both the data and the machines that generate it.
+    Senior Software Engineer specializing in manufacturing and test data systems, analytics platforms, and real-time telemetry, with a mechanical engineering foundation. 10+ years building high-throughput ingestion, lakehouse analytics, and observability stacks (Prometheus, Grafana) in AWS/Kubernetes. Began career in industrial robotics and hardware automation; fluent in both the data and the machines that generate it.
   ],
 )
 
@@ -49,25 +49,36 @@
   panic("Unknown company '" + company + "'; expected one of: " + overviews.keys().join(", "))
 }
 
+#let sde = (
+  title: "ML & Rule-Based Decisioning Engine",
+  name: "SDE",
+  bullets: (
+    "Co-architected a decisioning engine combining real-time ML scoring with rule-based business logic",
+    "Partnered with stakeholders to codify complex business rules into standardized, strongly typed schemas",
+    "Spearheaded an audit logging and configuration management system for versioned, traceable rule deployments",
+    "Compiled the engine to WebAssembly (WASM) to enable live, in-browser testing and debugging of rule configurations",
+  ),
+)
+
 #let bear = (
   title: "Distributed Data Ingestion & Edge Systems",
   name: "Bear",
   bullets: (
     "Designed and implemented lightweight Go daemon deployed to secure manufacturing sites for high-volume data extraction",
-    "Architected fault-tolerant coordination system for distributed edge nodes",
-    "Delivered MVP collecting multiple terabytes of compliance and research data",
+    "Architected fault-tolerant edge coordination handling network partitions, retries, and state recovery across distributed nodes",
+    "Scaled ingestion pipeline to collect multiple terabytes of manufacturing compliance and research data",
     "Designed IAM credential vending model with AWS to enforce dynamic S3 access controls",
     "Built CI/CD and packaging pipelines for deployment to isolated environments",
   ),
 )
 
 #let ipa-ray = (
-  title: "ML Enablement & Ray Platform POC",
+  title: "Distributed ML Compute & Ray Platform",
   name: "IPA",
   bullets: (
-    "Built Python abstractions enabling Ray-based distributed analysis",
-    "Integrated Ray with custom search/indexing over Iceberg/S3",
-    "Partnered with researchers to migrate workloads onto distributed compute",
+    "Built a Python SDK abstracting Ray cluster provisioning and job execution for distributed data analysis",
+    "Integrated Ray datasets with custom Iceberg/S3 indexing to enable selective, predicate-pushed reads at scale",
+    "Partnered with ML researchers to migrate single-node workloads to distributed Ray clusters",
   ),
 )
 
@@ -76,20 +87,20 @@
   name: "Insight Lab",
   bullets: (
     "Co-led implementation of Iceberg-based data lakehouse for manufacturing analytics at scale",
-    "Optimized Kubernetes node packing with AWS to reduce idle compute costs",
+    "Optimized EKS bin-packing and autoscaling policies to significantly reduce idle compute costs",
     "Developed custom indexing strategies using Rust/Polars for accelerated lookups",
-    "Coordinated cross-team monitoring and performance standards",
+    "Established cross-team SLOs, query performance benchmarks, and observability standards",
   ),
 )
 
 #let argus = (
-  title: "Highly Available/Scalable Real-Time ML & Inference Infrastructure",
+  title: "Real-Time ML & Inference Infrastructure",
   name: "Argus",
   bullets: (
     "Architected real-time ML pipeline capable of executing arbitrary containerized models",
     "Built ELT pipelines for structured aggregation of manufacturing telemetry",
     "Designed HA monitoring stack (Prometheus, Grafana, Splunk)",
-    "Developed internal S3 crypto compatibility libraries",
+    "Developed cross-language S3 client-side encryption libraries for secure service-to-service data exchange",
   ),
 )
 
@@ -100,6 +111,7 @@
   date: "May 2019 - Present",
   tools: "Go, Python, Kubernetes, Docker, AWS (EKS, EC2, S3, IAM), Linux Tooling, Kafka, Spark, Iceberg, Ray, Rust, Prometheus, Grafana",
   projects: (
+    sde,
     bear,
     ipa-ray,
     insight-lab,
@@ -114,10 +126,9 @@
   date: "May 2018 - May 2019",
   tools: "Node, Docker, GraphQL, React, AWS (Cognito, Lambda, ECS, DynamoDB, CloudFormation, CloudWatch, CloudTrail)",
   bullets: (
-    "Technical lead for ecommerce team",
-    "Designed and led development on identity server with integrated MFA and email domain verification",
-    "Designed and developed an enterprise-grade (over $1 million in pipeline per quarter) serverless ecommerce platform for SaaS, hosted in AWS",
-    "Designed and developed an account management platform for enterprise SaaS applications",
+    "Tech lead for the ecommerce team; architected a serverless AWS checkout and billing platform supporting $1M+ in quarterly pipeline",
+    "Designed and built a centralized identity server with MFA and automated email domain verification",
+    "Built a multi-tenant enterprise SaaS account and subscription management platform",
   ),
 )
 
@@ -128,8 +139,8 @@
   date: "October 2017 - May 2018",
   tools: "C# Dotnet Core, React, Azure Pipelines",
   bullets: (
-    "Developed and maintained an MVC structured web application with C# .NET Core backend and React.JS frontend, hosted in Azure",
-    "Automated CI/CD pipelines for the website/API and apps to the Google Play Store and App Store",
+    "Built and maintained full-stack ecommerce web applications and REST APIs using C# .NET Core and React on Azure",
+    "Automated end-to-end CI/CD release pipelines across web, API, iOS App Store, and Google Play",
   ),
 )
 
@@ -139,9 +150,9 @@
   location: "Midland, Michigan",
   date: "December 2015 - October 2017",
   bullets: (
-    "Developed .NET applications in C# to control and coordinate various types of hardware including robotic arms",
+    "Developed C#/.NET control software to orchestrate robotic arms and laboratory automation hardware",
     "Wrote a custom database access layer for handling large, runtime-modified SQL tables from multiple systems",
-    "Set up and maintained automated CI/CD pipelines through TFS and VSTS for quickly and easily deploying code to robotic systems",
+    "Built automated TFS/VSTS CI/CD pipelines for reliable deployment to physical robotic workcells",
   ),
 )
 
