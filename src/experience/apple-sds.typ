@@ -14,7 +14,7 @@
   title: "Software Engineer",
   company: "Apple (Strategic Data Solutions - Physical Goods)",
   location: "Seattle, Washington",
-  date: "October 2025 - Present",
+  date: "October 2025 – Present",
   tools: "Python (uv), Cassandra/Custom Platform Tools, Containers, Iceberg, Snowflake",
   projects: (
     sde,

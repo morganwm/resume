@@ -5,16 +5,10 @@
 #let header-data = (
   name: "Morgan Watson-Morris",
   title: job-title,
-  title_exp: job-title + " | 10 Years Professional Experience",
+  title-exp: job-title + " | 10 Years Professional Experience",
   email: "morgan@morganw.com",
   phone: "(989) 430-8935",
   github: "github.com/morganwm",
-)
-
-#let overview-items = (
-  "6+ Years at Apple: Infrastructure/Services on Manufacturing data (Current Job)",
-  "2 Years at Startups: Application/Services",
-  "2 Years at Dow Chemical: Robotics/Automation",
 )
 
 // Company-specific overview paragraphs. Select at compile time with:
@@ -46,7 +40,12 @@
 #let overview-description = if company in overviews {
   overviews.at(company)
 } else {
-  panic("Unknown company '" + company + "'; expected one of: " + overviews.keys().join(", "))
+  panic(
+    "Unknown company '"
+      + company
+      + "'; expected one of: "
+      + overviews.keys().join(", "),
+  )
 }
 
 // Work experience entries live in src/experience/, one file per role.

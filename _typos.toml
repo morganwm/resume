@@ -1,0 +1,6 @@
+[files]
+extend-exclude = ["fonts/"]
+
+[default.extend-words]
+# "TeX Gyre Heros" is the font's name
+heros = "heros"

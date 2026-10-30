@@ -46,7 +46,7 @@
   title: "Software Engineer",
   company: "Apple (Manufacturing Data Insight)",
   location: "Austin, Texas",
-  date: "May 2019 - October 2025",
+  date: "May 2019 – October 2025",
   tools: "Go, Python, Kubernetes, Docker, AWS (EKS, EC2, S3, IAM), Linux Tooling, Kafka, Spark, Iceberg, Ray, Rust, Prometheus, Grafana",
   projects: (
     bear,

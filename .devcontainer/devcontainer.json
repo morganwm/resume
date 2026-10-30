@@ -1,12 +1,17 @@
 {
     "name": "Typst Resume",
-    "image": "ghcr.io/typst/typst:latest",
+    // Keep in sync with TYPST_VERSION in .github/workflows/build-resume.yml
+    "image": "ghcr.io/typst/typst:0.15.1",
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": true,
             "configureZshAsDefaultShell": true,
             "upgradePackages": true
         }
+    },
+    "containerEnv": {
+        // Use the committed fonts so local builds match CI
+        "TYPST_FONT_PATHS": "${containerWorkspaceFolder}/fonts"
     },
     "customizations": {
         "vscode": {
@@ -18,22 +23,29 @@
             "settings": {
                 "tinymist.preview.refresh": "onSave",
                 "tinymist.preview.feature": "tab",
+                "tinymist.fontPaths": [
+                    "${workspaceFolder}/fonts"
+                ],
+                "tinymist.formatterMode": "typstyle",
+                "[typst]": {
+                    "editor.defaultFormatter": "myriad-dreamin.tinymist",
+                    "editor.formatOnSave": true
+                },
+                "[typst-code]": {
+                    "editor.inlayHints.enabled": "on"
+                },
                 "harper.linters.LongSentences": false,
                 "harper.linters.SpellCheck": false,
                 "harper.linters.OrthographicConsistency": false,
                 "harper.linters.SplitWords": false,
                 "cSpell.words": [
-                    "dreamin",
                     "Ecommerce",
                     "Flink",
                     "VSTS"
                 ]
-            },
-            "[typst-code]": {
-                "editor.inlayHints.enabled": "on"
             }
         }
     },
-    "postCreateCommand": "",
+    "postCreateCommand": "sh .devcontainer/post-create.sh",
     "remoteUser": "vscode"
 }

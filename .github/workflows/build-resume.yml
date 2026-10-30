@@ -10,55 +10,64 @@ on:
     types: [published]
 
 env:
-  FONT_CACHE_KEY: tex-gyre-heros-qhv2.004otf
+  # Keep in sync with the image tag in .devcontainer/devcontainer.json
+  TYPST_VERSION: 0.15.1
+  TYPSTYLE_VERSION: 0.15.2
+  # Fonts are committed under fonts/ so every build uses the same files
+  TYPST_FONT_PATHS: fonts
 
 jobs:
-  # Download the fonts once per run (cache-backed) so the matrix jobs never
-  # hit the font mirror themselves — six simultaneous cold-cache downloads
-  # were getting connections refused.
-  fonts:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Cache fonts
-        id: font-cache
-        uses: actions/cache@v6
-        with:
-          path: fonts
-          key: ${{ env.FONT_CACHE_KEY }}
+      - name: Checkout repository
+        uses: actions/checkout@v7
 
-      - name: Download and Unzip Archive
-        if: steps.font-cache.outputs.cache-hit != 'true'
+      - name: Install typstyle
         run: |
-          # Define variables for clarity
-          DOWNLOAD_URL="https://www.gust.org.pl/projects/e-foundry/tex-gyre/heros/qhv2.004otf.zip"
-          OUTPUT_FILE="tex-gyre-hero.zip"
-          EXTRACT_DIR="fonts"
+          curl -sSL --fail --retry 3 -o /usr/local/bin/typstyle \
+            "https://github.com/typstyle-rs/typstyle/releases/download/v${TYPSTYLE_VERSION}/typstyle-x86_64-unknown-linux-gnu"
+          chmod +x /usr/local/bin/typstyle
 
-          # Use curl to download the file to the specified output file
-          # (retry transient failures — the mirror can be slow)
-          curl -L --fail --retry 5 --retry-all-errors --connect-timeout 15 "$DOWNLOAD_URL" -o "$OUTPUT_FILE"
+      - name: Check formatting
+        run: typstyle --check .
 
-          # Create the extraction directory
-          mkdir -p "$EXTRACT_DIR"
+      - name: Check spelling
+        uses: crate-ci/typos@v1.51.1
 
-          # Unzip the archive into the specified directory
-          unzip "$OUTPUT_FILE" -d "$EXTRACT_DIR"
+  # The list of variants comes from the overviews dictionary in
+  # src/content.typ, so adding a key there is all it takes to build it.
+  variants:
+    runs-on: ubuntu-latest
+    outputs:
+      companies: ${{ steps.list.outputs.companies }}
 
-          # Optional: Remove the downloaded zip file
-          rm "$OUTPUT_FILE"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
 
-      - name: Verify extracted files
-        run: ls -R fonts
+      - name: Install Typst
+        uses: typst-community/setup-typst@v5
+        with:
+          typst-version: ${{ env.TYPST_VERSION }}
+
+      - name: List company variants
+        id: list
+        run: |
+          companies=$(typst eval 'import "src/content.typ": overviews; overviews.keys()')
+          echo "companies=$companies" >> "$GITHUB_OUTPUT"
+          echo "Variants: $companies"
 
   build:
     runs-on: ubuntu-latest
-    needs: fonts
+    needs: variants
+    permissions:
+      contents: write # upload release assets
 
     strategy:
       matrix:
-        # Keys from the overviews dictionary in src/content.typ
-        company: [base, temporal, chainguard, overland, gable, stoke]
+        company: ${{ fromJSON(needs.variants.outputs.companies) }}
 
     env:
       FILE_BASE: morgan_watson-morris_resume
@@ -67,28 +76,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Restore fonts
-        uses: actions/cache/restore@v6
-        with:
-          path: fonts
-          key: ${{ env.FONT_CACHE_KEY }}
-          fail-on-cache-miss: true
-
       - name: Install Typst
         uses: typst-community/setup-typst@v5
         with:
-          typst-version: latest
+          typst-version: ${{ env.TYPST_VERSION }}
 
       - name: Compile resume
+        env:
+          COMPANY: ${{ matrix.company }}
         run: |
-          if [ "${{ matrix.company }}" = "base" ]; then
+          if [ "$COMPANY" = "base" ]; then
             PDF="${FILE_BASE}.pdf"
           else
-            PDF="${FILE_BASE}_${{ matrix.company }}.pdf"
+            PDF="${FILE_BASE}_${COMPANY}.pdf"
           fi
           echo "PDF=$PDF" >> "$GITHUB_ENV"
 
-          typst compile resume.typ "$PDF" --font-path ./fonts --input company=${{ matrix.company }}
+          typst compile resume.typ "$PDF" \
+            --input company="$COMPANY" \
+            2> typst-stderr.log || { cat typst-stderr.log >&2; exit 1; }
+          cat typst-stderr.log >&2
+
+          # Typst only warns about a missing font and silently falls back,
+          # which changes the layout; treat that as a failure.
+          if grep -q "unknown font family" typst-stderr.log; then
+            echo "::error::Font missing; the PDF would use a fallback font"
+            exit 1
+          fi
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v7
@@ -99,27 +113,6 @@ jobs:
 
       - name: Attach to Release
         if: github.event_name == 'release'
-        uses: actions/github-script@v9
-
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require("fs").promises;
-            const { repo: { owner, repo } } = context;
-
-            const release = await github.rest.repos.getReleaseByTag({
-              owner, repo,
-              tag: process.env.GITHUB_REF.replace("refs/tags/", ""),
-            });
-
-            const file = process.env.PDF;
-
-            console.log("Release:", { release });
-            console.log("File:", { file })
-
-            await github.rest.repos.uploadReleaseAsset({
-              owner, repo,
-              release_id: release.data.id,
-              name: file,
-              data: await fs.readFile(file),
-            });
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload "$GITHUB_REF_NAME" "$PDF" --clobber --repo "$GITHUB_REPOSITORY"
