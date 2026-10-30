@@ -84,7 +84,6 @@ jobs:
       - name: Compile resume
         env:
           COMPANY: ${{ matrix.company }}
-          RESUME_PHONE: ${{ secrets.RESUME_PHONE }}
         run: |
           if [ "$COMPANY" = "base" ]; then
             PDF="${FILE_BASE}.pdf"
@@ -95,7 +94,6 @@ jobs:
 
           typst compile resume.typ "$PDF" \
             --input company="$COMPANY" \
-            --input phone="$RESUME_PHONE" \
             2> typst-stderr.log || { cat typst-stderr.log >&2; exit 1; }
           cat typst-stderr.log >&2
 

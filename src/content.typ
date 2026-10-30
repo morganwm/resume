@@ -2,17 +2,12 @@
 
 #let job-title = "Software Engineer"
 
-// The phone number is kept out of the repo; pass it at compile time with
-//   --input phone="(555) 555-5555"
-// (CI reads it from the RESUME_PHONE secret). Omitted from the header if unset.
-#let phone = sys.inputs.at("phone", default: "").trim()
-
 #let header-data = (
   name: "Morgan Watson-Morris",
   title: job-title,
   title-exp: job-title + " | 10 Years Professional Experience",
   email: "morgan@morganw.com",
-  phone: if phone == "" { none } else { phone },
+  phone: "(989) 430-8935",
   github: "github.com/morganwm",
 )
 

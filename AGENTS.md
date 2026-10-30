@@ -42,4 +42,4 @@ Run `typst compile resume.typ --font-path fonts` (or `just build`) to generate t
 
 Company-specific variants swap only the overview paragraph: `typst compile resume.typ --input company=<key>`, where `<key>` is a key of the `overviews` dictionary in `src/content.typ` (defaults to `base`). CI reads the variant list from that dictionary, so no workflow change is needed to add one.
 
-Other inputs: `phone=<number>` (kept out of the repo; omitted when unset), `header=false`, `footer=false`.
+Other inputs: `header=false`, `footer=false`.

@@ -46,12 +46,8 @@ typst compile resume.typ morgan_watson-morris_resume.pdf
 | Input     | Default | Effect                                                     |
 | --------- | ------- | ---------------------------------------------------------- |
 | `company` | `base`  | Selects the overview paragraph (key of `overviews`)        |
-| `phone`   | (none)  | Phone number in the contact line; omitted when not given   |
 | `header`  | `true`  | `false` hides the contact block and running page header    |
 | `footer`  | `true`  | `false` hides the page-number footer                       |
-
-The phone number is not stored in the repo. Locally, set `RESUME_PHONE` and the
-`just` recipes pass it through; CI reads the `RESUME_PHONE` repository secret.
 
 ### Company Variants
 
