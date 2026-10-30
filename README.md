@@ -7,24 +7,51 @@ A clean, maintainable Typst-based resume with modular structure and CI/CD pipeli
 ## Structure
 
 - `resume.typ` - Main entry point that imports templates and content
-- `src/templates.typ` - Reusable template functions (header, section, job, etc.)
-- `src/content.typ` - All resume content data (header info, work experience, education)
+- `src/templates.typ` - Reusable template functions and styling (page setup, header, job, project, etc.)
+- `src/content.typ` - Header info, overview paragraphs, education, and the ordered `work-experience` list
+- `src/experience/` - One file per role, each exporting that job's dictionary and its projects
+- `fonts/` - TeX Gyre Heros (GUST Font License), committed so every build uses the same font
 
 ## Local Development
 
 ### Prerequisites
 
-Install Typst:
+- [Typst](https://typst.app/docs/getting-started/installation/) 0.15.1 (the version CI pins)
+- Optional: [just](https://github.com/casey/just) for the shortcuts below, and
+  [typstyle](https://github.com/typstyle-rs/typstyle) for formatting
 
-- macOS: `brew install typst`
-- Linux: See [Typst installation guide](https://typst.app/docs/getting-started/installation/)
-- Windows: See [Typst installation guide](https://typst.app/docs/getting-started/installation/)
+The devcontainer installs all of these and configures VS Code (Tinymist preview,
+format on save).
+
+Typst needs to find the committed fonts. Either pass `--font-path fonts` or set:
+
+```bash
+export TYPST_FONT_PATHS=fonts
+```
 
 ### Compile Resume
 
 ```bash
+just build
+```
+
+or directly:
+
+```bash
 typst compile resume.typ morgan_watson-morris_resume.pdf
 ```
+
+### Compile-Time Inputs
+
+| Input     | Default | Effect                                                     |
+| --------- | ------- | ---------------------------------------------------------- |
+| `company` | `base`  | Selects the overview paragraph (key of `overviews`)        |
+| `phone`   | (none)  | Phone number in the contact line; omitted when not given   |
+| `header`  | `true`  | `false` hides the contact block and running page header    |
+| `footer`  | `true`  | `false` hides the page-number footer                       |
+
+The phone number is not stored in the repo. Locally, set `RESUME_PHONE` and the
+`just` recipes pass it through; CI reads the `RESUME_PHONE` repository secret.
 
 ### Company Variants
 
@@ -32,32 +59,45 @@ The overview paragraph can be swapped per company at compile time. The available
 variants are the keys of the `overviews` dictionary in `src/content.typ`:
 
 ```bash
-typst compile resume.typ morgan_watson-morris_resume_temporal.pdf --input company=temporal
+just build temporal
 ```
 
-Omitting `--input company=...` builds the generic (`base`) resume. To add a
-variant, add a key to `overviews` and (to get it built in CI) add it to the
-`company` matrix in `.github/workflows/build-resume.yml`.
+```bash
+just all
+```
+
+To add a variant, add a key to `overviews`. CI reads the keys from that
+dictionary, so the new variant is built automatically.
 
 ### Watch Mode (Auto-Compile on Changes)
 
 ```bash
-typst watch resume.typ morgan_watson-morris_resume.pdf
+just watch
+```
+
+### Formatting
+
+Typst files are formatted with typstyle; CI fails if they aren't.
+
+```bash
+just fmt
 ```
 
 ## Editing
 
-- **Update content**: Edit `src/content.typ` - all resume data is stored here
-- **Change styling**: Edit `src/templates.typ` - modify functions to adjust lay out, fonts, spacing
+- **Update content**: Edit `src/content.typ`, or the role's file in `src/experience/`
+- **Change styling**: Edit `src/templates.typ` - modify functions to adjust layout, fonts, spacing
 - **Structure changes**: Edit `resume.typ` - change the order or add/remove sections
 
 ## CI/CD
 
-The repository includes a GitHub Actions workflow (`.github/workflows/build-resume.yml`) that:
+The GitHub Actions workflow (`.github/workflows/build-resume.yml`):
 
-- Automatically compiles the resume (base + all company variants, one matrix job each) on push to main/master
+- Checks formatting (typstyle) and spelling (typos)
+- Compiles the resume (base + every company variant, one matrix job each) on pushes and pull requests to main/master
+- Fails the build if the font can't be found, instead of silently using a fallback
 - Publishes each PDF as its own workflow artifact (`resume-pdf-<company>`)
-- Attaches all PDFs to the release when you push a tag (the download link above always points to the base resume)
+- Attaches all PDFs to a GitHub release when one is published (the download link above always points to the base resume)
 
 ### Manual Workflow Trigger
 
@@ -65,18 +105,9 @@ You can also manually trigger the workflow from the GitHub Actions tab.
 
 ### Creating a Release
 
-To create a release with the compiled PDF:
+PDFs are attached when a GitHub **release is published**. Pushing a tag on its own
+does not trigger the workflow. Create the release from the GitHub UI, or:
 
 ```bash
-git tag -a v1.0.0 -m "Resume update"
-git push origin v1.0.0
+gh release create v1.0.0 --title "Resume update" --notes ""
 ```
-
-## File Organization
-
-The modular structure makes it easy to:
-
-- Update content without touching templates
-- Adjust styling without modifying content
-- Add new sections or reorganize the resume
-- Maintain version control with clear diffs

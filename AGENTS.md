@@ -8,11 +8,13 @@ Maintain a Typst resume where `src/content.typ` (plus the per-role files in `src
 
 - **Content**: `src/content.typ` and `src/experience/*.typ` are authoritative. Preserve existing wording unless explicitly asked to rewrite; fix typos freely.
 - **Style**: Keep the resume clean and consistent; prefer small, iterative layout changes.
-- **Tooling**: Use `typst` CLI to compile and verify.
+- **Tooling**: Use `typst` CLI (version pinned in CI) to compile and verify; format with `typstyle -i .` before committing (CI runs `typstyle --check .`).
 
 ## Best Practices for Typst
 
-- **Structure**: Use functions for repeated elements like job entries, education blocks, and section headers.
+- **Structure**: Use functions for repeated elements like job entries and education blocks. Template functions take named arguments matching the content dictionaries' keys, so entries are passed by spreading (`job(..job-data)`).
+- **Sections**: Use level-1 headings (`= Work Experience`); their look comes from the `show heading` rule in `resume`.
+- **Spacing**: Prefer `block(above:/below:)` over negative `v()` adjustments.
 - **Styling**: Define a `resume` function that sets up the document properties (margins, fonts) and wraps the content.
 - **Robustness**: Escape special characters if necessary (though Typst handles most well).
 - **Iterative Development**: Compile often to ensure syntax is correct.
@@ -30,10 +32,14 @@ Maintain a Typst resume where `src/content.typ` (plus the per-role files in `src
 - `src/content.typ`: Resume content data (header, overviews, education) and the ordered `work-experience` list.
 - `src/experience/`: One file per role, each exporting that job's dictionary and its projects.
 - `src/templates.typ`: Visual styling and component functions.
+- `fonts/`: Committed TeX Gyre Heros; builds must use it (`TYPST_FONT_PATHS=fonts` or `--font-path fonts`).
+- `justfile`: Shortcuts for building, watching, and formatting.
 - `AGENTS.md`: This file.
 
 ## Compilation
 
-Run `typst compile resume.typ` to generate the PDF.
+Run `typst compile resume.typ --font-path fonts` (or `just build`) to generate the PDF. A warning about an unknown font family means the font wasn't found; CI treats it as an error.
 
-Company-specific variants swap only the overview paragraph: `typst compile resume.typ --input company=<key>`, where `<key>` is a key of the `overviews` dictionary in `src/content.typ` (defaults to `base`). CI builds every variant in the `company` matrix in `.github/workflows/build-resume.yml`; keep that list in sync with the dictionary.
+Company-specific variants swap only the overview paragraph: `typst compile resume.typ --input company=<key>`, where `<key>` is a key of the `overviews` dictionary in `src/content.typ` (defaults to `base`). CI reads the variant list from that dictionary, so no workflow change is needed to add one.
+
+Other inputs: `phone=<number>` (kept out of the repo; omitted when unset), `header=false`, `footer=false`.
